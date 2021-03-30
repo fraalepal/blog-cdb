@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "727554324916",
+    "project_id": "my-application-9c7af",
+    "storage_bucket": "my-application-9c7af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727554324916:android:d041381484c9c3c4611ae1",
+        "android_client_info": {
+          "package_name": "com.softloyal.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727554324916-kqlsc773f1k1go06gobu3h43645qoi4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWj-D0xw7clFJ9ZlSHduOGVns6eL7y_58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727554324916-kqlsc773f1k1go06gobu3h43645qoi4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

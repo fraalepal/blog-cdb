@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="40dp"
+    tools:context=".Perfil.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/decoracion"
+        android:layout_width="28dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/semicirculo" />
+
+    <TextView
+        android:id="@+id/bienvenida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:text="Bienvenido/a" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:text="Regístrate aquí" />
+
+    <Button
+        android:id="@+id/reg_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/whiteTransperenthalf"
+        android:textAlignment="textStart"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:text="¿Ya tienes cuenta?, Inicia Sesión"
+        android:textAllCaps="false"
+        android:textColor="#707070"
+        android:textSize="16dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/reg_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:backgroundTint="#FFCC80"
+        android:background="#FFCC80"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="#000000"
+        android:textSize="18sp"
+        android:ems="10"
+        android:hint="Introduce tu email..."
+        android:inputType="textEmailAddress"
+        android:padding="16dp" />
+
+    <EditText
+        android:id="@+id/reg_pass_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/whiteTransperenthalf"
+        android:ems="10"
+        android:hint="Introduce tu contraseña..."
+        android:inputType="textPassword"
+        android:padding="15dp"
+        android:background="#FFCC80"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="#000000" />
+
+    <EditText
+        android:id="@+id/reg_confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/whiteTransperenthalf"
+        android:ems="10"
+        android:hint="Confirma tu contraseña..."
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:background="#FFCC80"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="#000000"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/reg_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="#29C69B"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="Crear nueva cuenta"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+
+    <ProgressBar
+        android:id="@+id/reg_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+</LinearLayout>

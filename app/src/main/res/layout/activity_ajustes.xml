@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Perfil.SetupActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:theme="@style/ToolbarTheme"
+        android:id="@+id/setupToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#29C69B"
+        app:titleTextColor="#ffffff">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/setup_image"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="78dp"
+        android:background="@drawable/default_image"
+        app:civ_border_color="#000000"
+        app:civ_border_width="1dp" />
+
+    <EditText
+        android:id="@+id/setup_name"
+        android:layout_width="wrap_content"
+        android:layout_height="132dp"
+        android:layout_below="@id/setup_image"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-126dp"
+        android:layout_marginEnd="2dp"
+        android:layout_toEndOf="@+id/setup_image"
+        android:hint="Nombre..."
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/setup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setup_name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="8dp"
+        android:background="#29C69B"
+        android:fontFamily="@font/montserratsemibold"
+        android:padding="15dp"
+        android:text="Actualizar ajustes de perfil"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <ProgressBar
+        android:id="@+id/setup_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setup_btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="499dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="40dp"
+        android:indeterminate="true"
+        android:visibility="invisible" />
+
+</RelativeLayout>
