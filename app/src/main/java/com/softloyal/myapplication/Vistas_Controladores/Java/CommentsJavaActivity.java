@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.softloyal.myapplication.Modelo.Comentario;
-import com.softloyal.myapplication.Modelo.ComentariosAdapter;
+import com.softloyal.myapplication.Modelo.ComentarioAdapter;
 import com.softloyal.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +41,7 @@ public class CommentsJavaActivity extends AppCompatActivity {
     private ImageView comentarioPostButton;
 
     private RecyclerView recyclerViewComentarios;
-    private ComentariosAdapter comentariosAdapter;
+    private ComentarioAdapter comentarioAdapter;
     private List<Comentario> comentarioList;
     private DividerItemDecoration dividerItemDecoration;
     private LinearLayoutManager linearLayoutManager;
@@ -75,18 +75,18 @@ public class CommentsJavaActivity extends AppCompatActivity {
 
         //RecyclerView a partir de listado cargado con los documentos de firebase
         comentarioList = new ArrayList<>();
-        comentariosAdapter = new ComentariosAdapter(comentarioList);
+        comentarioAdapter = new ComentarioAdapter(comentarioList);
         recyclerViewComentarios.setHasFixedSize(true);
         recyclerViewComentarios.setLayoutManager(new LinearLayoutManager(this));
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         dividerItemDecoration = new DividerItemDecoration(recyclerViewComentarios.getContext(), linearLayoutManager.getOrientation());
-        recyclerViewComentarios.setAdapter(comentariosAdapter);
+        recyclerViewComentarios.setAdapter(comentarioAdapter);
 
 
         //Es como el add de un post pero adaptado a los comentarios
 
-        firebaseFirestore.collection("Posts/" + postId + "/Comments")
+        firebaseFirestore.collection("Posts/" + postId + "/Comentario")
                 .addSnapshotListener(CommentsJavaActivity.this, new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
@@ -100,7 +100,7 @@ public class CommentsJavaActivity extends AppCompatActivity {
                                     String commentId = doc.getDocument().getId();
                                     Comentario comentario = doc.getDocument().toObject(Comentario.class);
                                     comentarioList.add(comentario);
-                                    comentariosAdapter.notifyDataSetChanged();
+                                    comentarioAdapter.notifyDataSetChanged();
 
 
                                 }
@@ -124,7 +124,7 @@ public class CommentsJavaActivity extends AppCompatActivity {
                 commentsMap.put("user_id", usuarioActualID);
                 commentsMap.put("timestamp", FieldValue.serverTimestamp());
 
-                firebaseFirestore.collection("Posts/" + postId + "/Comments").add(commentsMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                firebaseFirestore.collection("Posts/" + postId + "/Comentario").add(commentsMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
 

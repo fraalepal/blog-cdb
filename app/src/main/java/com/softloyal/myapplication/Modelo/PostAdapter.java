@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.softloyal.myapplication.Vistas_Controladores.Java.CommentsJavaActivity;
 import com.softloyal.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +25,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.softloyal.myapplication.Vistas_Controladores.Java.CommentsJavaActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,101 +35,98 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
-    public List<Post> listaPost;
+    public List<Post> blog_list;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
     public Context context;
 
     //Constructor de los posts a adaptar en formato lista
-    public PostAdapter(List<Post> listaPost){
-        this.listaPost = listaPost;
+    public PostAdapter(List<Post> blog_list){
+        this.blog_list= blog_list;
     }
-
 
     //Metodos propio de los adaptadores de la vista, se nos indica que al renderizar la vista de los posts, hay que incializar el layout donde se realizará la adpatación y el contexto.
     //ViewHolder = Como se verá finalmente cada uno de los posts de la lista a recorrer.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_item,viewGroup,false);
-         context = viewGroup.getContext();
-         firebaseFirestore = FirebaseFirestore.getInstance(); //Se define una instancia que llama a la BBDD
-         firebaseAuth = FirebaseAuth.getInstance(); //Se define una instancia que servira para realizar el proceso de comprobación de logueo para poder postear.
-         return  new ViewHolder(view);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_item,viewGroup,false);
+        context = viewGroup.getContext();
+        firebaseFirestore = FirebaseFirestore.getInstance();//Se define una instancia que llama a la BBDD
+        firebaseAuth = FirebaseAuth.getInstance();//Se define una instancia que servira para realizar el proceso de comprobación de logueo para poder postear.
+        return  new ViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
         viewHolder.setIsRecyclable(false);
 
-
         //Se declaran estas dos variables como estaticas para que puedan ser accesibles desde otros métodos y no queden fuera de las iteraciones
-        final String idPost = listaPost.get(i).BlogPostId;
-        final String idUsuarioActual = firebaseAuth.getCurrentUser().getUid();
+        final String blogPostId = blog_list.get(i).BlogPostId;
+        final String currentUserId = firebaseAuth.getCurrentUser().getUid();
 
         //Aqui estamos seleccionando dentro de los elementos a recorrer, los atributos del post
-        String descripcion = listaPost.get(i).getDescripcion();
-        viewHolder.setDescText(descripcion);
-        String urlImagen = listaPost.get(i).getUrlImagen();
-        String thumbUri = listaPost.get(i).getImage_thumb();
-        viewHolder.setImagenPost(urlImagen,thumbUri);
+        String desc_data = blog_list.get(i).getDesc();
+        viewHolder.setDescText(desc_data);
+        String image_uri = blog_list.get(i).getImage_url();
+        String thumbUri = blog_list.get(i).getImage_thumb();
+        viewHolder.setBlogImage(image_uri,thumbUri);
 
-        String idUsuario = listaPost.get(i).getIdUsuario();
+        String user_id = blog_list.get(i).getUser_id();
 
         //Se hace una llamada a la tabla de Users para poder obtener los datos del usuario, en caso de existir guardamos su nombre e imagen para luego
         //colocarlos en la vista (estetica)
+        firebaseFirestore.collection("Users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    String userName = task.getResult().getString("name");
+                    String userImage = task.getResult().getString("image");
+                    viewHolder.setData(userName,userImage);
 
-            firebaseFirestore.collection("Users").document(idUsuarioActual).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if(task.isSuccessful()){
-                        String username = task.getResult().getString("name");
-                        String imagenPerfilUsuario = task.getResult().getString("image");
-                        viewHolder.setData(username,imagenPerfilUsuario);
-
-                    }else {
-                        String error = task.getException().getMessage();
-                        Toast.makeText(context, "Error en el almacenamiento de la Base de Datos"+error, Toast.LENGTH_SHORT).show();
-                    }
-
+                }else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(context, "Error en el almacenamiento de la Base de Datos"+error, Toast.LENGTH_SHORT).show();
                 }
-            });
+
+            }
+        });
 
         //Se hace una llamada a la tabla de Posts para poder obtener los likes de cada post, en caso de existir colocamos el número total en la vista (estetica)
-
-        firebaseFirestore.collection("Posts/" + idPost + "/Likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Posts/" + blogPostId + "/Likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                 if (documentSnapshots != null) {
                     if (!documentSnapshots.isEmpty()) {
-                        viewHolder.actualizarNumeroLikes(documentSnapshots.size() + "");
+
+                        viewHolder.updateLikesCount(documentSnapshots.size() + "");
                     } else {
-                        viewHolder.actualizarNumeroLikes("0"); //Si no hay likes, se deja a 0
+
+                        viewHolder.updateLikesCount("0");
                     }
                 }
             }
         });
 
         //Se hace una llamada a la tabla de Posts para poder obtener los comentarios de cada post, en caso de existir colocamos el número total en la vista (estetica)
-
-        firebaseFirestore.collection("Posts/" + idPost + "/Comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Posts/" + blogPostId + "/Comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                 if (documentSnapshots != null) {
                     if (!documentSnapshots.isEmpty()) {
-                        viewHolder.actualizarNumeroComentarios(documentSnapshots.size() + "");
+
+                        viewHolder.updateCommentsCount(documentSnapshots.size() + "");
                     } else {
 
-                        viewHolder.actualizarNumeroComentarios("0"); //Si no hay likes, se deja a 0
+                        viewHolder.updateCommentsCount("0");
                     }
                 }
             }
         });
 
         //obtenemos los likes de la colección
-        firebaseFirestore.collection("Posts/"+idPost+"/Likes").document(idUsuarioActual).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("Posts/"+blogPostId+"/Likes").document(currentUserId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 if (documentSnapshot!= null) {
@@ -148,17 +145,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
 
-                firebaseFirestore.collection("Posts/"+idPost+"/Likes").document(idUsuarioActual).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                firebaseFirestore.collection("Posts/"+blogPostId+"/Likes").document(currentUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(!task.getResult().exists()){
                             Map<String, Object> likesMap = new HashMap<>();
                             likesMap.put("timestamp", FieldValue.serverTimestamp());
 
-                            firebaseFirestore.collection("Posts/"+idPost+"/Likes").document(idUsuarioActual).set(likesMap);
+                            firebaseFirestore.collection("Posts/"+blogPostId+"/Likes").document(currentUserId).set(likesMap);
                         }
                         else {
-                            firebaseFirestore.collection("Posts/"+idPost+"/Likes").document(idUsuarioActual).delete();
+                            firebaseFirestore.collection("Posts/"+blogPostId+"/Likes").document(currentUserId).delete();
 
                         }
                     }
@@ -174,7 +171,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             public void onClick(View v) {
 
                 Intent commentIntent = new Intent(context, CommentsJavaActivity.class);
-                commentIntent.putExtra("blog_post_id", idPost);
+                commentIntent.putExtra("blog_post_id", blogPostId);
                 context.startActivity(commentIntent);
 
             }
@@ -186,7 +183,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return listaPost.size();
+        return blog_list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -214,7 +211,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             descView= mView.findViewById(R.id.blog_desc);
             descView.setText(descText);
         }
-        public void setImagenPost(String downloadUri, String thumbUri) {
+        public void setBlogImage(String downloadUri, String thumbUri) {
 
             blogImageView = mView.findViewById(R.id.blog_image);
 
@@ -240,11 +237,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             Glide.with(context).applyDefaultRequestOptions(placeholderOption).load(image).into(blogUserImage);
 
         }
-        public void actualizarNumeroLikes(String count) {
+        public void updateLikesCount(String count) {
             blogLikeCount = mView.findViewById(R.id.blog_like_counter);
             blogLikeCount.setText(count + " Me gusta");
         }
-        public void actualizarNumeroComentarios(String count) {
+        public void updateCommentsCount(String count) {
             blogCommentCount = mView.findViewById(R.id.blog_comment_count);
             blogCommentCount.setText("Ver los "+ count + " comentarios");
         }

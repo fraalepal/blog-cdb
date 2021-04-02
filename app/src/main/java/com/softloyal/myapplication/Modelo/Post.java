@@ -1,14 +1,15 @@
 package com.softloyal.myapplication.Modelo;
 
 
-import java.util.Date;
+import com.softloyal.myapplication.Modelo.PostId;
 
+import java.util.Date;
 //Entidad post, la cual es creada por un usuario, esta entidad conformará las bases para la posterior creación de los posts dentro de cada una de las categorias
 public class Post extends PostId {
 
     //Atributos del post
-    public String urlImagen, image_thumb, descripcion, idUsuario;
-    public Date fechaSubida;
+    public String image_url, image_thumb, desc, user_id;
+    public Date timestamp;
 
 
     //Creación de un constructor vacio
@@ -17,24 +18,23 @@ public class Post extends PostId {
     }
 
     //Constructor con los atributos de Post
-    public Post(String urlImagen, String image_thumb, String descripcion, String idUsuario, Date fechaSubida) {
-        this.urlImagen = urlImagen;
+    public Post(String image_url, String image_thumb, String desc, String user_id, Date timestamp) {
+        this.image_url = image_url;
         this.image_thumb = image_thumb;
-        this.descripcion = descripcion;
-        this.idUsuario = idUsuario;
-        this.fechaSubida = fechaSubida;
+        this.desc = desc;
+        this.user_id = user_id;
+        this.timestamp = timestamp;
 
     }
-
 
     //Getters y Setters de los atributos
 
-    public String getUrlImagen() {
-        return urlImagen;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public String getImage_thumb() {
@@ -45,27 +45,27 @@ public class Post extends PostId {
         this.image_thumb = image_thumb;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
-    public Date getFechaSubida() {
-        return fechaSubida;
+    public Date getTimestamp() {
+        return timestamp;
     }
 
-    public void setFechaSubida(Date fechaSubida) {
-        this.fechaSubida = fechaSubida;
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 }
