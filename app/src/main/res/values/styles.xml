@@ -10,7 +10,7 @@
 
     <!-- styles.xml -->
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="android:fontFamily">@font/montserratregular</item>
     </style>
 
 </resources>

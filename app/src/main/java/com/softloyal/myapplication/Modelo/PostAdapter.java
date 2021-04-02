@@ -50,10 +50,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_blog_post_item,viewGroup,false);
         context = viewGroup.getContext();
         firebaseFirestore = FirebaseFirestore.getInstance();//Se define una instancia que llama a la BBDD
         firebaseAuth = FirebaseAuth.getInstance();//Se define una instancia que servira para realizar el proceso de comprobación de logueo para poder postear.
+
         return  new ViewHolder(view);
     }
 
@@ -74,6 +75,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.setBlogImage(image_uri,thumbUri);
 
         String user_id = blog_list.get(i).getUser_id();
+
 
         //Se hace una llamada a la tabla de Users para poder obtener los datos del usuario, en caso de existir guardamos su nombre e imagen para luego
         //colocarlos en la vista (estetica)
@@ -206,6 +208,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             blogLikeBtn = mView.findViewById(R.id.blog_like_btn);
             blogLikeCount = mView.findViewById(R.id.blog_like_counter);
             blogCommentBtn = mView.findViewById(R.id.blog_comment_icon);
+
+
+
         }
         public void setDescText(String descText){
             descView= mView.findViewById(R.id.blog_desc);
@@ -243,7 +248,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
         public void updateCommentsCount(String count) {
             blogCommentCount = mView.findViewById(R.id.blog_comment_count);
-            blogCommentCount.setText("Ver los "+ count + " comentarios");
+            blogCommentCount.setText(count + " comentarios");
         }
     }
 }

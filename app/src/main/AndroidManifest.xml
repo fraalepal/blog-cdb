@@ -16,25 +16,29 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.softloyal.myapplication.Vistas_Controladores.Java.CommentsJavaActivity"></activity>
         <activity
-            android:name="com.softloyal.myapplication.Vistas_Controladores.MainActivity"
+            android:name="com.softloyal.myapplication.Vistas_Controladores.Java.MainJavaActivty"
             android:screenOrientation="fullSensor">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.softloyal.myapplication.Perfil.LoginActivity"
             android:screenOrientation="fullSensor" />
         <activity android:name="com.softloyal.myapplication.Perfil.RegisterActivity" />
         <activity android:name="com.softloyal.myapplication.Perfil.SetupActivity" />
+        <activity android:name=".Vistas_Controladores.LandingPage" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name="com.softloyal.myapplication.Vistas_Controladores.Java.PostJavaActivity"
-            android:parentActivityName="com.softloyal.myapplication.Vistas_Controladores.MainActivity" />
+            android:parentActivityName="com.softloyal.myapplication.Vistas_Controladores.Java.MainJavaActivty" />
     </application>
 
 </manifest>

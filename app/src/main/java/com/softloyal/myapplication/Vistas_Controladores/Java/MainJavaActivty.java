@@ -1,4 +1,4 @@
-package com.softloyal.myapplication.Vistas_Controladores;
+package com.softloyal.myapplication.Vistas_Controladores.Java;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.softloyal.myapplication.Vistas_Controladores.Java.JavaFragment;
-import com.softloyal.myapplication.Vistas_Controladores.Java.PostJavaActivity;
 import com.softloyal.myapplication.Perfil.LoginActivity;
 import com.softloyal.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.softloyal.myapplication.Perfil.SetupActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainJavaActivty extends AppCompatActivity {
 
     //Declaración de una Toolbar, Auth de Firebase, el Storage de Firebase y elementos
     private Toolbar mainToolbar;
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolbar);
-        getSupportActionBar().setTitle("Nombre");
+        getSupportActionBar().setTitle("Java");
 
         //Si el usuario está logueado, se realiza una inicialización de botones y fragment donde se cargaran los post
         if(mAuth.getCurrentUser() != null) {
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             addPostButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, PostJavaActivity.class));
+                    startActivity(new Intent(MainJavaActivty.this, PostJavaActivity.class));
                 }
             });
         }
@@ -103,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         if (!task.getResult().exists()) {
-                            Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+                            Intent setupIntent = new Intent(MainJavaActivty.this, SetupActivity.class);
                             startActivity(setupIntent);
                         }
                     }
                     else{
                         String error = task.getException().getMessage();
-                        Toast.makeText(MainActivity.this, "Error"+ error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainJavaActivty.this, "Error"+ error, Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -133,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 logOut(); //Cierra sesión
                 return true;
             case R.id.action_settings_btn:
-                Intent settingIntent = new Intent(MainActivity.this, SetupActivity.class);
+                Intent settingIntent = new Intent(MainJavaActivty.this, SetupActivity.class);
                 startActivity(settingIntent); //Redirección a actividad de personalización de perfil
                 return true;
             default:
@@ -150,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToLoginActivity() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainJavaActivty.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

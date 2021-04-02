@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vistas_Controladores.MainActivity">
+    tools:context=".Vistas_Controladores.Java.MainJavaActivty">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_toolbar"
@@ -23,14 +23,6 @@
     </androidx.appcompat.widget.Toolbar>
 
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_toolbar" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/mainBottomNav"
         android:layout_width="0dp"
@@ -45,11 +37,11 @@
     <FrameLayout
         android:id="@+id/main_content_fragment"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/add_post_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
     </FrameLayout>
 

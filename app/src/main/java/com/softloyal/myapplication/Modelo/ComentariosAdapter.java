@@ -53,9 +53,9 @@ public class ComentariosAdapter extends RecyclerView.Adapter<ComentariosAdapter.
         holder.setIsRecyclable(false);
 
         //Aqui estamos seleccionando dentro de los elementos a recorrer, los atributos del comentario
-        String mensajeComentario = comentarioList.get(position).getMensaje();
+        String mensajeComentario = comentarioList.get(position).getMessage();
         holder.setMensajeComentario(mensajeComentario);
-        String idUsuario = comentarioList.get(position).getIdUsuario();
+        String idUsuario = comentarioList.get(position).getUser_id();
 
         //Se hace una llamada a la tabla de Users para poder obtener el id de los usuarios y así vincular los comentarios respectivos, en caso de existir guardamos su nombre e imagen para luego
         //colocarlos en la vista (estetica)

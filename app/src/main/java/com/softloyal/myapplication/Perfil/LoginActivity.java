@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.softloyal.myapplication.Vistas_Controladores.MainActivity;
+import com.softloyal.myapplication.Vistas_Controladores.LandingPage;
 import com.softloyal.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Intent para ir desde la Actividad de Login hasta la Actividad Principal
     private void goToMainActivity() {
-        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(LoginActivity.this, LandingPage.class);
         startActivity(mainIntent);
         finish();
     }

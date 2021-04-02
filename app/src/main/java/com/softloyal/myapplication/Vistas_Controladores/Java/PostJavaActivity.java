@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.softloyal.myapplication.Vistas_Controladores.MainActivity;
 import com.softloyal.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -143,13 +142,13 @@ public class PostJavaActivity extends AppCompatActivity {
                                         postmap.put("timestamp", FieldValue.serverTimestamp());
 
                                         //Aquí se llama a la colección Posts y se le añade el Map creado anteriormente
-                                        firebaseFirestore.collection("Posts").add(postmap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        firebaseFirestore.collection("Java").add(postmap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentReference> task) {
                                                 if (task.isSuccessful()) {
                                                     //Si sale bien, se indica con un mensaje
                                                     Toast.makeText(PostJavaActivity.this, "Se ha añadido correctamente", Toast.LENGTH_SHORT).show();
-                                                    Intent mainIntent = new Intent(PostJavaActivity.this, MainActivity.class);
+                                                    Intent mainIntent = new Intent(PostJavaActivity.this, MainJavaActivty.class);
                                                     startActivity(mainIntent);
                                                     finish();
 

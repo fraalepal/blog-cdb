@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.softloyal.myapplication.Vistas_Controladores.MainActivity;
+import com.softloyal.myapplication.Vistas_Controladores.Java.MainJavaActivty;
 import com.softloyal.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -147,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Manda a un usuario a la actividad principal
     private void goToMainActivity() {
-        Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(RegisterActivity.this, MainJavaActivty.class);
         startActivity(mainIntent);
 
         finish();

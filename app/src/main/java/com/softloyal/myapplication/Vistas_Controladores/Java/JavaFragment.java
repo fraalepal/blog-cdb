@@ -75,7 +75,7 @@ public class JavaFragment extends Fragment {
                 }
             });
 
-            Query firstQuery = firebaseFirestore.collection("Posts").orderBy("timestamp",Query.Direction.DESCENDING).limit(3);
+            Query firstQuery = firebaseFirestore.collection("Java").orderBy("timestamp",Query.Direction.DESCENDING).limit(3);
 
             firstQuery.addSnapshotListener(getActivity(),new EventListener<QuerySnapshot>() {
                 @Override
@@ -116,7 +116,7 @@ public class JavaFragment extends Fragment {
     }
     //Se mandan querys para evitar cargar todos los posts del tirón
     public void loadMorePost(){
-        Query nextQuery = firebaseFirestore.collection("Posts")
+        Query nextQuery = firebaseFirestore.collection("Java")
                 .orderBy("timestamp",Query.Direction.DESCENDING)
                 .startAfter(lastVisible)
                 .limit(3);
@@ -144,5 +144,8 @@ public class JavaFragment extends Fragment {
         });
 
     }
+
+
+
 
 }

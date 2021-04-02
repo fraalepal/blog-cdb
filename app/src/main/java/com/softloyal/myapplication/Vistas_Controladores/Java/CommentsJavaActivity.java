@@ -86,7 +86,7 @@ public class CommentsJavaActivity extends AppCompatActivity {
 
         //Es como el add de un post pero adaptado a los comentarios
 
-        firebaseFirestore.collection("Posts/" + postId + "/Comentario")
+        firebaseFirestore.collection("Java/" + postId + "/Comentario")
                 .addSnapshotListener(CommentsJavaActivity.this, new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
@@ -124,7 +124,7 @@ public class CommentsJavaActivity extends AppCompatActivity {
                 commentsMap.put("user_id", usuarioActualID);
                 commentsMap.put("timestamp", FieldValue.serverTimestamp());
 
-                firebaseFirestore.collection("Posts/" + postId + "/Comentario").add(commentsMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                firebaseFirestore.collection("Java/" + postId + "/Comentario").add(commentsMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
 

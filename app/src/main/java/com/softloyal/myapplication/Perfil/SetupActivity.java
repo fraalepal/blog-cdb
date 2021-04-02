@@ -22,7 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.softloyal.myapplication.Vistas_Controladores.MainActivity;
+import com.softloyal.myapplication.Vistas_Controladores.Java.MainJavaActivty;
 import com.softloyal.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -180,7 +180,7 @@ public class SetupActivity extends AppCompatActivity {
 
                 if(task.isSuccessful()){
                     Toast.makeText(SetupActivity.this, "Se han modificado los ajustes de su usuario correctamente", Toast.LENGTH_SHORT).show();
-                    Intent mainIntent = new Intent(SetupActivity.this, MainActivity.class);
+                    Intent mainIntent = new Intent(SetupActivity.this, MainJavaActivty.class);
                     startActivity(mainIntent);
                     finish();
 
