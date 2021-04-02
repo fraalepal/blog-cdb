@@ -14,46 +14,40 @@
         android:layout_height="50dp"
         app:srcCompat="@drawable/semicirculo" />
 
+    <ImageView
+        android:id="@+id/decoracion2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="72dp"
+        app:srcCompat="@drawable/logonombre" />
+
+
     <TextView
         android:id="@+id/bienvenida"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:textSize="30dp"
+        android:layout_marginTop="36dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         android:textColor="#000000"
-        android:text="Bienvenido/a" />
+        android:text="Únete a la comunidad" />
 
-    <TextView
-        android:id="@+id/textView4"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:text="Regístrate aquí" />
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="#29C69B"/>
 
-    <Button
-        android:id="@+id/reg_login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/whiteTransperenthalf"
-        android:textAlignment="textStart"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:text="¿Ya tienes cuenta?, Inicia Sesión"
-        android:textAllCaps="false"
-        android:textColor="#707070"
-        android:textSize="16dp"
-        tools:ignore="MissingConstraints" />
+
 
     <EditText
         android:id="@+id/reg_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="#FFCC80"
-        android:background="#FFCC80"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/button_welcome_login"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="#000000"
         android:textSize="18sp"
@@ -66,13 +60,12 @@
         android:id="@+id/reg_pass_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/whiteTransperenthalf"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_welcome_login"
         android:ems="10"
         android:hint="Introduce tu contraseña..."
         android:inputType="textPassword"
         android:padding="15dp"
-        android:background="#FFCC80"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="#000000" />
 
@@ -80,13 +73,12 @@
         android:id="@+id/reg_confirm_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/whiteTransperenthalf"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_welcome_login"
         android:ems="10"
         android:hint="Confirma tu contraseña..."
         android:inputType="textPassword"
         android:padding="16dp"
-        android:background="#FFCC80"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="#000000"
         android:textSize="18sp" />
@@ -95,16 +87,28 @@
         android:id="@+id/reg_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:background="#29C69B"
+        android:background="@drawable/button_welcome_register"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:text="Crear nueva cuenta"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/reg_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/whiteTransperenthalf"
+        android:textAlignment="textStart"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:text="¿Ya tienes cuenta?, Inicia Sesión"
+        android:textAllCaps="false"
+        android:textColor="#707070"
+        android:textSize="12dp"
+        />
 
 
     <ProgressBar
