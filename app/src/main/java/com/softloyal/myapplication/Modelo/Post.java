@@ -8,7 +8,7 @@ import java.util.Date;
 public class Post extends PostId {
 
     //Atributos del post
-    public String image_url, image_thumb, desc, user_id;
+    public String image_url, image_thumb, title, desc, desc2, desc3, user_id;
     public Date timestamp;
 
 
@@ -18,10 +18,13 @@ public class Post extends PostId {
     }
 
     //Constructor con los atributos de Post
-    public Post(String image_url, String image_thumb, String desc, String user_id, Date timestamp) {
+    public Post(String image_url, String image_thumb, String title, String desc, String desc2, String desc3, String user_id, Date timestamp) {
         this.image_url = image_url;
         this.image_thumb = image_thumb;
+        this.title = title;
         this.desc = desc;
+        this.desc2 = desc;
+        this.desc3 = desc;
         this.user_id = user_id;
         this.timestamp = timestamp;
 
@@ -45,12 +48,36 @@ public class Post extends PostId {
         this.image_thumb = image_thumb;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDesc() {
         return desc;
     }
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getDesc2() {
+        return desc2;
+    }
+
+    public void setDesc2(String desc2) {
+        this.desc2 = desc2;
+    }
+
+    public String getDesc3() {
+        return desc3;
+    }
+
+    public void setDesc3(String desc3) {
+        this.desc3 = desc3;
     }
 
     public String getUser_id() {

@@ -45,7 +45,7 @@ public class PostJavaActivity extends AppCompatActivity {
 
     private Toolbar newPostToolbar;
     private ImageView newPostImage;
-    private EditText newPostDesc;
+    private EditText newPostDesc, newPostDesc2, newPostDesc3;
     private Button newPostButton;
     private Uri urlImage = null;
 
@@ -69,6 +69,8 @@ public class PostJavaActivity extends AppCompatActivity {
 
         newPostImage = findViewById(R.id.new_post_image);
         newPostDesc = findViewById(R.id.new_post_desc);
+        newPostDesc2 = findViewById(R.id.new_post_desc2);
+        newPostDesc3= findViewById(R.id.new_post_desc3);
         newPostButton = findViewById(R.id.post_btn);
         newPostProgressBar = findViewById(R.id.new_post_progress);
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -83,7 +85,7 @@ public class PostJavaActivity extends AppCompatActivity {
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setMinCropResultSize(1024, 720)
-                        .setAspectRatio(4, 3)
+                        .setAspectRatio(16, 9)
                         .start(PostJavaActivity.this);
 
             }
@@ -94,6 +96,8 @@ public class PostJavaActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 final String desc = newPostDesc.getText().toString().trim();
+                final String desc2 = newPostDesc2.getText().toString().trim();
+                final String desc3 = newPostDesc3.getText().toString().trim();
                 if (urlImage != null) {
                     newPostProgressBar.setVisibility(View.VISIBLE);
                     //UUID aleatorio para la imagen
@@ -138,6 +142,8 @@ public class PostJavaActivity extends AppCompatActivity {
                                         postmap.put("image_url", downloadUri);
                                         postmap.put("image_thumb",downloadthumbUri);
                                         postmap.put("desc", desc);
+                                        postmap.put("desc2", desc2);
+                                        postmap.put("desc3", desc3);
                                         postmap.put("user_id", usuarioActualId);
                                         postmap.put("timestamp", FieldValue.serverTimestamp());
 
