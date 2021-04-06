@@ -45,7 +45,7 @@ public class PostJavaActivity extends AppCompatActivity {
 
     private Toolbar newPostToolbar;
     private ImageView newPostImage;
-    private EditText newPostDesc, newPostDesc2, newPostDesc3;
+    private EditText newPostTitle, newPostDesc;
     private Button newPostButton;
     private Uri urlImage = null;
 
@@ -62,15 +62,14 @@ public class PostJavaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        newPostToolbar = findViewById(R.id.new_post_toolbar);
+        /*newPostToolbar = findViewById(R.id.new_post_toolbar);
         setSupportActionBar(newPostToolbar);
         getSupportActionBar().setTitle("Añadir una nueva publicación");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
         newPostImage = findViewById(R.id.new_post_image);
+        newPostTitle = findViewById(R.id.new_post_title);
         newPostDesc = findViewById(R.id.new_post_desc);
-        newPostDesc2 = findViewById(R.id.new_post_desc2);
-        newPostDesc3= findViewById(R.id.new_post_desc3);
         newPostButton = findViewById(R.id.post_btn);
         newPostProgressBar = findViewById(R.id.new_post_progress);
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -94,10 +93,8 @@ public class PostJavaActivity extends AppCompatActivity {
         newPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final String title = newPostTitle.getText().toString().trim();
                 final String desc = newPostDesc.getText().toString().trim();
-                final String desc2 = newPostDesc2.getText().toString().trim();
-                final String desc3 = newPostDesc3.getText().toString().trim();
                 if (urlImage != null) {
                     newPostProgressBar.setVisibility(View.VISIBLE);
                     //UUID aleatorio para la imagen
@@ -137,13 +134,12 @@ public class PostJavaActivity extends AppCompatActivity {
 
                                         String downloadthumbUri = taskSnapshot.getDownloadUrl().toString();
 
-                                        //el documento referido al post, se crea como un map con esos atributos: image_url, image_thumb, desc, user_id, timestamp
+                                        //el documento referido al post, se crea como un map con esos atributos: image_url, image_thumb, title, desc, desc2,desc3, user_id, timestamp
                                         Map<String, Object> postmap = new HashMap<>();
                                         postmap.put("image_url", downloadUri);
                                         postmap.put("image_thumb",downloadthumbUri);
+                                        postmap.put("title", title);
                                         postmap.put("desc", desc);
-                                        postmap.put("desc2", desc2);
-                                        postmap.put("desc3", desc3);
                                         postmap.put("user_id", usuarioActualId);
                                         postmap.put("timestamp", FieldValue.serverTimestamp());
 

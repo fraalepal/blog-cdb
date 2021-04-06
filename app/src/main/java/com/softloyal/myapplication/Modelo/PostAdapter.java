@@ -70,11 +70,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //Aqui estamos seleccionando dentro de los elementos a recorrer, los atributos del post
         String title = blog_list.get(i).getTitle();
         String desc_data = blog_list.get(i).getDesc();
-        String desc2_data = blog_list.get(i).getDesc2();
-        String desc3_data = blog_list.get(i).getDesc3();
+        viewHolder.setTitle(title);
         viewHolder.setDescText(desc_data);
-        viewHolder.setDesc2Text(desc2_data);
-        viewHolder.setDesc3Text(desc3_data);
         String image_uri = blog_list.get(i).getImage_url();
         String thumbUri = blog_list.get(i).getImage_thumb();
         viewHolder.setBlogImage(image_uri,thumbUri);
@@ -196,11 +193,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public View mView;
-        public TextView descView, descView2, descView3;
+        public TextView descView;
         public ImageView blogImageView;
         public TextView blogDate;
         public TextView blogUserName;
-        public TextView title;
+        public TextView titleView;
         public CircleImageView blogUserImage;
         public ImageView blogLikeBtn;
         public TextView blogLikeCount, blogCommentCount;
@@ -218,20 +215,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         }
 
+        public void setTitle(String title){
+            titleView= mView.findViewById(R.id.blog_title);
+            titleView.setText(title);
+        }
+
         public void setDescText(String descText){
             descView= mView.findViewById(R.id.blog_desc);
             descView.setText(descText);
         }
 
-        public void setDesc2Text(String desc2Text){
-            descView2= mView.findViewById(R.id.blog_desc2);
-            descView2.setText(desc2Text);
-        }
 
-        public void setDesc3Text(String desc3Text){
-            descView3= mView.findViewById(R.id.blog_desc3);
-            descView3.setText(desc3Text);
-        }
 
 
         public void setBlogImage(String downloadUri, String thumbUri) {
@@ -249,10 +243,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         public  void setData(String name, String image){
             blogUserName = mView.findViewById(R.id.blog_user_name);
-            title = mView.findViewById(R.id.blog_title);
             blogUserImage = mView.findViewById(R.id.blog_user_image);
             blogUserName.setText(name);
-            title.setText("Título:");
 
             RequestOptions placeholderOption =new RequestOptions();
             placeholderOption.placeholder(R.drawable.profile_placeholder);

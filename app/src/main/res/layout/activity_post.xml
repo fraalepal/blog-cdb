@@ -19,99 +19,97 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/new_post_image"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="50dp"
-        android:background="@android:color/darker_gray"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_post_toolbar"
-        app:srcCompat="@drawable/anyadirfoto"
-        tools:ignore="VectorDrawableCompat" />
-
-    <EditText
-        android:id="@+id/new_post_desc"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Añade un pie de página a la fotografía..."
-        android:fontFamily="@font/montserratregular"
-        android:inputType="textMultiLine|textPersonName"
-        android:padding="16dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_post_image" />
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/new_post_toolbar">
 
-    <EditText
-        android:id="@+id/new_post_desc2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Añade un pie de página a la fotografía..."
-        android:fontFamily="@font/montserratregular"
-        android:inputType="textMultiLine|textPersonName"
-        android:padding="16dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_post_desc" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/new_post_desc3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Añade un pie de página a la fotografía..."
-        android:fontFamily="@font/montserratregular"
-        android:inputType="textMultiLine|textPersonName"
-        android:padding="16dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_post_desc2" />
 
-    <Button
-        android:id="@+id/post_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#29C69B"
-        android:padding="16dp"
-        android:text="Compartir"
-        android:fontFamily="@font/montserratsemibold"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_post_desc3" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-    <ProgressBar
-        android:id="@+id/new_post_progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:indeterminate="true"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                <ImageView
+                    android:id="@+id/new_post_image"
+                    android:layout_width="96dp"
+                    android:layout_height="54dp"
+                    android:background="@android:color/darker_gray"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/placeholder"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:textStyle="bold"
+                    android:textColor="#606060"
+                    android:layout_gravity="center_vertical"
+                    android:text="Selecciona una imagen" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/new_post_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Añade un título al post..."
+                android:inputType="textMultiLine"
+                android:textSize="24dp"
+                android:background="@android:color/transparent"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textColorHint="#606060" />
+
+
+            <EditText
+                android:id="@+id/new_post_desc"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="serif"
+                android:hint="Añade un primer párrafo al post..."
+                android:background="@android:color/transparent"
+                android:textAlignment="textStart"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:textColor="#000000"
+                android:textColorHint="#606060"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/post_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#29C69B"
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="Compartir"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <ProgressBar
+                android:id="@+id/new_post_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

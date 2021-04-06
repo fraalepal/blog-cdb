@@ -82,7 +82,6 @@ public class LandingPage extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                             String userName = task.getResult().getString("name");
-                            String image = task.getResult().getString("image");
                             name.setText(userName);
 
                     }

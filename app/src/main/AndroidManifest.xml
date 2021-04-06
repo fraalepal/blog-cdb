@@ -17,7 +17,7 @@
         <activity android:name="com.softloyal.myapplication.Vistas_Controladores.Java.CommentsJavaActivity"></activity>
         <activity
             android:name="com.softloyal.myapplication.Vistas_Controladores.Java.MainJavaActivty"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
