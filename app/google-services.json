@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "727554324916",
-    "project_id": "my-application-9c7af",
-    "storage_bucket": "my-application-9c7af.appspot.com"
+    "project_number": "649749589327",
+    "project_id": "helloworldblog-68e50",
+    "storage_bucket": "helloworldblog-68e50.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:727554324916:android:d041381484c9c3c4611ae1",
+        "mobilesdk_app_id": "1:649749589327:android:50015a00fcbee7b25be93a",
         "android_client_info": {
-          "package_name": "com.softloyal.myapplication"
+          "package_name": "com.fraalepal.helloworldblog"
         }
       },
       "oauth_client": [
         {
-          "client_id": "727554324916-kqlsc773f1k1go06gobu3h43645qoi4f.apps.googleusercontent.com",
+          "client_id": "649749589327-ht91rqam1lpjb4brai2hcg5f5j0qqmp9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDWj-D0xw7clFJ9ZlSHduOGVns6eL7y_58"
+          "current_key": "AIzaSyBIR1FVJFSZ40JY7z3cGCR9s2IbG2DM1Ow"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "727554324916-kqlsc773f1k1go06gobu3h43645qoi4f.apps.googleusercontent.com",
+              "client_id": "649749589327-ht91rqam1lpjb4brai2hcg5f5j0qqmp9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
