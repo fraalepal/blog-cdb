@@ -69,7 +69,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         //Aqui estamos seleccionando dentro de los elementos a recorrer, los atributos del post
         String title = blog_list.get(i).getTitle();
-        String tech = blog_list.get(i).getTech();
+        String tech = "#"+blog_list.get(i).getTech();
         String desc_data = blog_list.get(i).getDesc();
         viewHolder.setTitle(title);
         viewHolder.setTech(tech);
@@ -116,7 +116,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         });
 
         //Se hace una llamada a la tabla de Posts para poder obtener los comentarios de cada post, en caso de existir colocamos el número total en la vista (estetica)
-        firebaseFirestore.collection("Posts/" + blogPostId + "/Comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Posts/" + blogPostId + "/Comentario").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                 if (documentSnapshots != null) {

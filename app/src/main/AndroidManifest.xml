@@ -16,14 +16,35 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Java.CommentsJavaActivity"></activity>
         <activity android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Python.CommentsPythonActivity"></activity>
+        <activity android:name="com.fraalepal.helloworldblog.Vistas_Controladores.JavaScript.CommentsJavascriptActivity"></activity>
+        <activity android:name="com.fraalepal.helloworldblog.Vistas_Controladores.TypeScript.CommentsTypescriptActivity"></activity>
+        <activity android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Go.CommentsGoActivity"></activity>
         <activity
             android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Java.MainJavaActivty"
             android:screenOrientation="portrait">
-
         </activity>
+
         <activity
             android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Python.MainPythonActivty"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name="com.fraalepal.helloworldblog.Vistas_Controladores.JavaScript.MainJavascriptActivty"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name="com.fraalepal.helloworldblog.Vistas_Controladores.TypeScript.MainTypescriptActivty"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Go.MainGoActivty"
+            android:screenOrientation="portrait">
+        </activity>
+
         <activity
             android:name="com.fraalepal.helloworldblog.Perfil.LoginActivity"
             android:screenOrientation="fullSensor" />
@@ -35,7 +56,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
@@ -48,8 +68,22 @@
         <activity
             android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Python.PostPythonActivity"
             android:parentActivityName="com.fraalepal.helloworldblog.Vistas_Controladores.Python.MainPythonActivty" >
+        </activity>
+        <activity
+            android:name="com.fraalepal.helloworldblog.Vistas_Controladores.JavaScript.PostJavascriptActivity"
+            android:parentActivityName="com.fraalepal.helloworldblog.Vistas_Controladores.JavaScript.MainJavascriptActivty" >
 
+        </activity>
 
+        <activity
+            android:name="com.fraalepal.helloworldblog.Vistas_Controladores.TypeScript.PostTypescriptActivity"
+            android:parentActivityName="com.fraalepal.helloworldblog.Vistas_Controladores.TypeScript.MainTypescriptActivty" >
+
+        </activity>
+
+        <activity
+            android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Go.PostGoActivity"
+            android:parentActivityName="com.fraalepal.helloworldblog.Vistas_Controladores.Go.MainGoActivty" >
 
         </activity>
     </application>

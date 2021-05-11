@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.fraalepal.helloworldblog.Vistas_Controladores.LandingPage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.fraalepal.helloworldblog.Vistas_Controladores.Java.MainJavaActivty;
@@ -203,7 +204,7 @@ public class SetupActivity extends AppCompatActivity {
 
                 if(task.isSuccessful()){
                     Toast.makeText(SetupActivity.this, "Se han modificado los ajustes de su usuario correctamente", Toast.LENGTH_SHORT).show();
-                    Intent mainIntent = new Intent(SetupActivity.this, MainJavaActivty.class);
+                    Intent mainIntent = new Intent(SetupActivity.this, LandingPage.class);
                     startActivity(mainIntent);
                     finish();
 

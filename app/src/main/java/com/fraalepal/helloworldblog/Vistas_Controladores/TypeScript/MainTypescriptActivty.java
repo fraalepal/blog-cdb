@@ -1,10 +1,7 @@
-package com.fraalepal.helloworldblog.Vistas_Controladores.Java;
+package com.fraalepal.helloworldblog.Vistas_Controladores.TypeScript;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,19 +11,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.fraalepal.helloworldblog.Perfil.LoginActivity;
+import com.fraalepal.helloworldblog.Perfil.SetupActivity;
 import com.fraalepal.helloworldblog.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.fraalepal.helloworldblog.Perfil.SetupActivity;
 
-public class MainJavaActivty extends AppCompatActivity {
+public class MainTypescriptActivty extends AppCompatActivity {
 
     //Declaración de una Toolbar, Auth de Firebase, el Storage de Firebase y elementos
     private Toolbar mainToolbar;
@@ -36,7 +33,7 @@ public class MainJavaActivty extends AppCompatActivity {
     private String idUsuario;
     private FloatingActionButton addPostButton;
     private BottomNavigationView mainBottomNav;
-    private JavaFragment javaFragment;
+    private TypescriptFragment javaFragment;
 
 
     @Override
@@ -51,19 +48,17 @@ public class MainJavaActivty extends AppCompatActivity {
 
         //Si el usuario está logueado, se realiza una inicialización de botones y fragment donde se cargaran los post
         if(mAuth.getCurrentUser() != null) {
+            mainBottomNav = findViewById(R.id.mainBottomNav);
             addPostButton = findViewById(R.id.add_post_btn);
-            javaFragment = new JavaFragment();
-
+            javaFragment = new TypescriptFragment();
 
             replaceFragment(javaFragment);
-
-
 
             //Al clickar en el botón de post, nos redirecciona a la vista de nuevo post
             addPostButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(MainJavaActivty.this, PostJavaActivity.class));
+                    startActivity(new Intent(MainTypescriptActivty.this, PostTypescriptActivity.class));
                 }
             });
         }
@@ -86,13 +81,13 @@ public class MainJavaActivty extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         if (!task.getResult().exists()) {
-                            Intent setupIntent = new Intent(MainJavaActivty.this, SetupActivity.class);
+                            Intent setupIntent = new Intent(MainTypescriptActivty.this, SetupActivity.class);
                             startActivity(setupIntent);
                         }
                     }
                     else{
                         String error = task.getException().getMessage();
-                        Toast.makeText(MainJavaActivty.this, "Error"+ error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainTypescriptActivty.this, "Error"+ error, Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -103,7 +98,7 @@ public class MainJavaActivty extends AppCompatActivity {
 
 
     private void goToLoginActivity() {
-        Intent intent = new Intent(MainJavaActivty.this, LoginActivity.class);
+        Intent intent = new Intent(MainTypescriptActivty.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

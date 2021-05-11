@@ -47,9 +47,6 @@ public class MainPythonActivty extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        mainToolbar = findViewById(R.id.main_toolbar);
-        setSupportActionBar(mainToolbar);
-        getSupportActionBar().setTitle("Python");
 
         //Si el usuario está logueado, se realiza una inicialización de botones y fragment donde se cargaran los post
         if(mAuth.getCurrentUser() != null) {
@@ -57,21 +54,7 @@ public class MainPythonActivty extends AppCompatActivity {
             addPostButton = findViewById(R.id.add_post_btn);
             javaFragment = new PythonFragment();
 
-
             replaceFragment(javaFragment);
-
-
-            //Cuando un user hace click en un elemento del menu, se ejecutarán las acciones correspondientes según la ID del elemento clickado
-            mainBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    switch (menuItem.getItemId()) {
-                        default:
-                            return false;
-                    }
-
-                }
-            });
 
             //Al clickar en el botón de post, nos redirecciona a la vista de nuevo post
             addPostButton.setOnClickListener(new View.OnClickListener() {
@@ -115,36 +98,6 @@ public class MainPythonActivty extends AppCompatActivity {
         }
     }
 
-    //Conecta el menú XML con la clase menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    //Gestión de las opciones del menú (logout y perfil)
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_logout_btn:
-                logOut(); //Cierra sesión
-                return true;
-            case R.id.action_settings_btn:
-                Intent settingIntent = new Intent(MainPythonActivty.this, SetupActivity.class);
-                startActivity(settingIntent); //Redirección a actividad de personalización de perfil
-                return true;
-            default:
-                return false;
-
-        }
-
-    }
-
-    //Llamamos con la autentificación del usuario a cerrar nuestra sesión y nos redireccionamos al login
-    private void logOut() {
-        mAuth.signOut();
-        goToLoginActivity();
-    }
 
     private void goToLoginActivity() {
         Intent intent = new Intent(MainPythonActivty.this, LoginActivity.class);
