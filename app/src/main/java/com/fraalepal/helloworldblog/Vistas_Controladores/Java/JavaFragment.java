@@ -75,7 +75,7 @@ public class JavaFragment extends Fragment {
                 }
             });
 
-            Query firstQuery = firebaseFirestore.collection("Posts").whereEqualTo("tech","Java").orderBy("timestamp",Query.Direction.DESCENDING);
+            Query firstQuery = firebaseFirestore.collection("Posts").orderBy("timestamp",Query.Direction.DESCENDING);
 
             firstQuery.addSnapshotListener(getActivity(),new EventListener<QuerySnapshot>() {
                 @Override
@@ -92,11 +92,19 @@ public class JavaFragment extends Fragment {
 
                                 String blogPostId = doc.getDocument().getId();
 
+
                                 Post blogPost = doc.getDocument().toObject(Post.class).withId(blogPostId);
+                                String tech = blogPost.getTech();
                                 if(isFirstPageFirstLoad) {
-                                    listado.add(blogPost);
+                                    if(tech.equals("Java")) {
+                                        listado.add(blogPost);
+                                    }
+
                                 }else{
-                                    listado.add(0,blogPost);
+                                    if(tech.equals("Java")) {
+                                        listado.add(0,blogPost);
+                                    }
+
                                 }
                                 adaptadorPost.notifyDataSetChanged();
 
@@ -114,6 +122,7 @@ public class JavaFragment extends Fragment {
         // Se han ido cargado los posts y los datos asociados al mismo.
         return view;
     }
+
 
 }
 

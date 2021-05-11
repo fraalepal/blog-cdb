@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="App Blog CBD"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/logonombre"
+        android:label="helloWorld!"
+        android:roundIcon="@drawable/logonombre"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.fraalepal.helloworldblog.Vistas_Controladores.Java.CommentsJavaActivity"></activity>
@@ -50,6 +50,9 @@
             android:screenOrientation="fullSensor" />
         <activity android:name="com.fraalepal.helloworldblog.Perfil.RegisterActivity" />
         <activity android:name="com.fraalepal.helloworldblog.Perfil.SetupActivity" />
+        <activity android:name="com.fraalepal.helloworldblog.Perfil.WelcomeActivity" >
+
+        </activity>
         <activity android:name="com.fraalepal.helloworldblog.Vistas_Controladores.LandingPage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

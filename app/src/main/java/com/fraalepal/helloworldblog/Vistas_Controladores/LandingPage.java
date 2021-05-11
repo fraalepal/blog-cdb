@@ -2,14 +2,11 @@ package com.fraalepal.helloworldblog.Vistas_Controladores;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,17 +18,14 @@ import androidx.cardview.widget.CardView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.fraalepal.helloworldblog.Perfil.ProfileFragment;
 import com.fraalepal.helloworldblog.Perfil.SetupActivity;
+import com.fraalepal.helloworldblog.Perfil.WelcomeActivity;
 import com.fraalepal.helloworldblog.Vistas_Controladores.Go.MainGoActivty;
-import com.fraalepal.helloworldblog.Vistas_Controladores.Java.JavaFragment;
-import com.fraalepal.helloworldblog.Vistas_Controladores.Java.PostJavaActivity;
 import com.fraalepal.helloworldblog.Vistas_Controladores.JavaScript.MainJavascriptActivty;
 import com.fraalepal.helloworldblog.Vistas_Controladores.TypeScript.MainTypescriptActivty;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -40,6 +34,7 @@ import com.fraalepal.helloworldblog.Perfil.LoginActivity;
 import com.fraalepal.helloworldblog.R;
 import com.fraalepal.helloworldblog.Vistas_Controladores.Java.MainJavaActivty;
 import com.fraalepal.helloworldblog.Vistas_Controladores.Python.MainPythonActivty;
+import com.google.firebase.firestore.Query;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -76,6 +71,10 @@ public class LandingPage extends AppCompatActivity {
 
 
         }
+
+        firebaseFirestore.collection("Posts").orderBy("timestamp",Query.Direction.DESCENDING);
+
+
 
         mainToolbar = findViewById(R.id.main_toolbar_main);
         setSupportActionBar(mainToolbar);
@@ -161,7 +160,7 @@ public class LandingPage extends AppCompatActivity {
         super.onStart();
         FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
         if (usuarioActual == null) {
-            goToLoginActivity();
+            goToWelcome();
 
         } else {
 
@@ -213,11 +212,11 @@ public class LandingPage extends AppCompatActivity {
     //Llamamos con la autentificación del usuario a cerrar nuestra sesión y nos redireccionamos al login
     private void logOut() {
         mAuth.signOut();
-        goToLoginActivity();
+        goToWelcome();
     }
 
-    private void goToLoginActivity() {
-        Intent intent = new Intent(LandingPage.this, LoginActivity.class);
+    private void goToWelcome() {
+        Intent intent = new Intent(LandingPage.this, WelcomeActivity.class);
         startActivity(intent);
         finish();
     }

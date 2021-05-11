@@ -74,7 +74,7 @@ public class GoFragment extends Fragment {
                 }
             });
 
-            Query firstQuery = firebaseFirestore.collection("Posts").whereEqualTo("tech", "Go").orderBy("timestamp",Query.Direction.DESCENDING);
+            Query firstQuery = firebaseFirestore.collection("Posts").orderBy("timestamp",Query.Direction.DESCENDING);
 
             firstQuery.addSnapshotListener(getActivity(),new EventListener<QuerySnapshot>() {
                 @Override
@@ -91,11 +91,19 @@ public class GoFragment extends Fragment {
 
                                 String blogPostId = doc.getDocument().getId();
 
+
                                 Post blogPost = doc.getDocument().toObject(Post.class).withId(blogPostId);
+                                String tech = blogPost.getTech();
                                 if(isFirstPageFirstLoad) {
-                                    listado.add(blogPost);
+                                    if(tech.equals("Go")) {
+                                        listado.add(blogPost);
+                                    }
+
                                 }else{
-                                    listado.add(0,blogPost);
+                                    if(tech.equals("Go")) {
+                                        listado.add(0,blogPost);
+                                    }
+
                                 }
                                 adaptadorPost.notifyDataSetChanged();
 
@@ -113,8 +121,7 @@ public class GoFragment extends Fragment {
         // Se han ido cargado los posts y los datos asociados al mismo.
         return view;
     }
-    //Se mandan querys para evitar cargar todos los posts del tirón
-
 
 
 }
+

@@ -99,6 +99,7 @@
         android:textColor="#000000"
         android:textSize="18dp"
         android:textStyle="bold"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
         android:text="Mis publicaciones" />

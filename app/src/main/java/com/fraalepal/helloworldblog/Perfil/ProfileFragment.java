@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.fraalepal.helloworldblog.Modelo.PostAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,10 +42,7 @@ public class ProfileFragment extends Fragment {
     private MyPostAdapter adaptadorPost;
     private FirebaseAuth firebaseAuth;
     private DocumentSnapshot lastVisible;
-    private Boolean isFirstPageFirstLoad = true;
-    private String idUsuario;
-    private Button button;
-    private TextView emptyView;
+    private Boolean isFirstPageFirstLoad= true;
 
     // Según el curso, es necesario un constructor vacío
     public ProfileFragment() {
@@ -55,101 +53,83 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_post, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        View viewDetails = inflater.inflate(R.layout.activity_blog_my_posts_item, container, false);
 
 
         listado = new ArrayList<>();
-
         blogListView = view.findViewById(R.id.blog_list_view);
-        emptyView = (TextView) view.findViewById(R.id.empty_view);
-        button = viewDetails.findViewById(R.id.deleteMyPostButton);
+
         firebaseAuth = FirebaseAuth.getInstance();
-        idUsuario = firebaseAuth.getCurrentUser().getUid();
+
         adaptadorPost = new MyPostAdapter(listado);
-        blogListView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        /*
-        int count = 0;
-        if (adaptadorPost != null) {
-            count = adaptadorPost.getItemCount();
-            if (count == 0) {
-                emptyView.setVisibility(View.VISIBLE);
-            } else {
-                blogListView.setVisibility(View.VISIBLE);
-            }
-        }*/
+        blogListView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false));
+        blogListView.setAdapter(adaptadorPost);
 
-            blogListView.setAdapter(adaptadorPost);
+        if(firebaseAuth.getCurrentUser() != null) {
+
+            firebaseFirestore = FirebaseFirestore.getInstance();
+
+            blogListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    Boolean reachedBottom = !recyclerView.canScrollVertically(1);
+                    if(reachedBottom){
+                        String desc = lastVisible.getString("desc");
+                    }
+
+                }
+            });
+
+            Query firstQuery = firebaseFirestore.collection("Posts").orderBy("timestamp",Query.Direction.DESCENDING);
+
+            firstQuery.addSnapshotListener(getActivity(),new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                    if(isFirstPageFirstLoad) {
+
+                        lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size() - 1);
+                    }
+
+                    if (documentSnapshots != null) {
+
+                        for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                            if (doc.getType() == DocumentChange.Type.ADDED) {
+
+                                String blogPostId = doc.getDocument().getId();
 
 
-            if (firebaseAuth.getCurrentUser() != null) {
-
-                firebaseFirestore = FirebaseFirestore.getInstance();
-
-
-                Query firstQuery = firebaseFirestore.collection("Posts").whereEqualTo("user_id", idUsuario).orderBy("timestamp", Query.Direction.DESCENDING);
-
-
-                firstQuery.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
-
-                    @Override
-                    public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-
-                        if (documentSnapshots != null) {
-
-                            for (final DocumentChange doc : documentSnapshots.getDocumentChanges()) {
-                                if (doc.getType() == DocumentChange.Type.ADDED) {
-
-                                    String blogPostId = doc.getDocument().getId();
-
-                                    Post blogPost = doc.getDocument().toObject(Post.class).withId(blogPostId);
-                                    if (isFirstPageFirstLoad) {
+                                Post blogPost = doc.getDocument().toObject(Post.class).withId(blogPostId);
+                                String user = blogPost.getUser_id();
+                                if(isFirstPageFirstLoad) {
+                                    if(user.equals(firebaseAuth.getCurrentUser().getUid())) {
                                         listado.add(blogPost);
-                                    } else {
-                                        listado.add(0, blogPost);
                                     }
-                                    adaptadorPost.notifyDataSetChanged();
 
-
-                                    button.setOnClickListener(new View.OnClickListener() {
-                                        public void onClick(View v) {
-                                            firebaseFirestore.collection("Java").document(doc.getDocument().getId())
-                                                    .delete()
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Log.w(TAG, "Error deleting document", e);
-                                                        }
-                                                    });
-                                        }
-                                    });
+                                }else{
+                                    if(user.equals(firebaseAuth.getCurrentUser().getUid())) {
+                                        listado.add(0,blogPost);
+                                    }
 
                                 }
+                                adaptadorPost.notifyDataSetChanged();
+
                             }
-                            isFirstPageFirstLoad = false;
-
-
                         }
+                        isFirstPageFirstLoad = false;
+
 
                     }
-                });
 
-            }
-
-            // Se han ido cargado los posts y los datos asociados al mismo.
-            return view;
+                }
+            });
         }
+
+        // Se han ido cargado los posts y los datos asociados al mismo.
+        return view;
+    }
 
 
 }
-
-
-
 

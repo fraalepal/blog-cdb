@@ -34,7 +34,7 @@ public class PythonFragment extends Fragment {
     private PostAdapter adaptadorPost;
     private FirebaseAuth firebaseAuth;
     private DocumentSnapshot lastVisible;
-    private Boolean isFirstPageFirstLoad = true;
+    private Boolean isFirstPageFirstLoad= true;
 
     // Según el curso, es necesario un constructor vacío
     public PythonFragment() {
@@ -48,16 +48,17 @@ public class PythonFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
 
+
         listado = new ArrayList<>();
         blogListView = view.findViewById(R.id.blog_list_view);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         adaptadorPost = new PostAdapter(listado);
-        blogListView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        blogListView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false));
         blogListView.setAdapter(adaptadorPost);
 
-        if (firebaseAuth.getCurrentUser() != null) {
+        if(firebaseAuth.getCurrentUser() != null) {
 
             firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -66,19 +67,19 @@ public class PythonFragment extends Fragment {
                 public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
                     Boolean reachedBottom = !recyclerView.canScrollVertically(1);
-                    if (reachedBottom) {
+                    if(reachedBottom){
                         String desc = lastVisible.getString("desc");
                     }
 
                 }
             });
 
-            Query firstQuery = firebaseFirestore.collection("Posts").whereEqualTo("tech", "Python").orderBy("timestamp", Query.Direction.DESCENDING);
+            Query firstQuery = firebaseFirestore.collection("Posts").orderBy("timestamp",Query.Direction.DESCENDING);
 
-            firstQuery.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+            firstQuery.addSnapshotListener(getActivity(),new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                    if (isFirstPageFirstLoad) {
+                    if(isFirstPageFirstLoad) {
 
                         lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size() - 1);
                     }
@@ -90,11 +91,19 @@ public class PythonFragment extends Fragment {
 
                                 String blogPostId = doc.getDocument().getId();
 
+
                                 Post blogPost = doc.getDocument().toObject(Post.class).withId(blogPostId);
-                                if (isFirstPageFirstLoad) {
-                                    listado.add(blogPost);
-                                } else {
-                                    listado.add(0, blogPost);
+                                String tech = blogPost.getTech();
+                                if(isFirstPageFirstLoad) {
+                                    if(tech.equals("Python")) {
+                                        listado.add(blogPost);
+                                    }
+
+                                }else{
+                                    if(tech.equals("Python")) {
+                                        listado.add(0,blogPost);
+                                    }
+
                                 }
                                 adaptadorPost.notifyDataSetChanged();
 
@@ -112,4 +121,7 @@ public class PythonFragment extends Fragment {
         // Se han ido cargado los posts y los datos asociados al mismo.
         return view;
     }
+
+
 }
+
