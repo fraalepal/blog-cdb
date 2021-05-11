@@ -51,6 +51,7 @@ public class MainJavaActivty extends AppCompatActivity {
 
         //Si el usuario está logueado, se realiza una inicialización de botones y fragment donde se cargaran los post
         if(mAuth.getCurrentUser() != null) {
+            mainBottomNav = findViewById(R.id.mainBottomNav);
             addPostButton = findViewById(R.id.add_post_btn);
             javaFragment = new JavaFragment();
 
