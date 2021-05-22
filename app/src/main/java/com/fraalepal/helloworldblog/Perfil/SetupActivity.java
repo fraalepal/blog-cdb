@@ -140,7 +140,6 @@ public class SetupActivity extends AppCompatActivity {
                             }
                         });
                     }
-
                     else{
                         storeFirestore(null,username);
                     }
